@@ -1,0 +1,101 @@
+<?xml version="1"?>
+
+<robot name="opcional">
+
+    <link name="base_link">
+        <inertial>
+            <origin xyz="0 0 0.05"/>
+            <mass value="10.0"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0"
+                               iyy="1.0" iyz="0"
+                                         izz="1.0"/>
+        </inertial>
+
+        <visual>
+            <origin xyz="0 0 0.05" />
+            <geometry>
+                <box size="0.3 0.3 0.1" />
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0.05"/>
+            <geometry>
+                <box size="0.3 0.3 0.1"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="vertical_link">
+        <inertial>
+            <origin xyz="0 0 0.1"/>
+            <mass value="4.0"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0"
+                               iyy="1.0" iyz="0"
+                                         izz="1.0"/>
+        </inertial>
+        
+        <visual>
+            <origin xyz="0 0 0.75" />
+            <geometry>
+                <box size="0.12 0.12 1.5" />
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0 0.75"/>
+            <geometry>
+                <box size="0.12 0.12 1.5"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="horizontal_link">
+        <inertial>
+            <origin xyz="0 0.25 0"/>
+            <mass value="4.0"/>
+            <inertia ixx="1.0" ixy="0.0" ixz="0"
+                               iyy="1.0" iyz="0"
+                                         izz="1.0"/>
+        </inertial>
+        
+        <visual>
+            <origin xyz="0 0.25 0" />
+            <geometry>
+                <box size="0.12 0.5 0.12" />
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+
+        <collision>
+            <origin xyz="0 0.25 0"/>
+            <geometry>
+                <box size="0.12 0.5 0.12"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="base_to_vertical" type="revolute">
+        <parent link="base_link"/>
+        <child link="vertical_link"/>
+        <origin xyz="0 0 0.1" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+        <limit lower="-0.8" upper="0.8" effort="1" velocity="1"/>
+    </joint>
+
+    <joint name="vertical_to_horizontal" type="revolute">
+        <parent link="vertical_link"/>
+        <child link="horizontal_link"/>
+        <origin xyz="0 0 1.5" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-3.14" upper="3.14" effort="1" velocity="1"/>
+    </joint>
+
+
+
+</robot>
